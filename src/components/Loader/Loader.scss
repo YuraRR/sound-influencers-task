@@ -1,0 +1,119 @@
+$cycle: 3s;
+$width: 12px;
+$gap: 10px;
+$heights: 15, 49, 89, 33, 49, 85, 81, 29, 15;
+
+$appearStarts: 10%, 22%, 33%, 33%, 44%, 44%, 55%, 55%, 55%;
+$disappearStarts: 66%, 66%, 77%, 77%, 88%, 88%, 94%, 94%, 94%;
+
+.sound-wave {
+  display: flex;
+  gap: $gap;
+  align-items: center;
+  height: 102px;
+  padding: 0 6px;
+  overflow: hidden;
+
+  span {
+    width: $width;
+    border-radius: 16px;
+    background: linear-gradient(107.52deg, #bce8ff 3.56%, #daf4ffee 50.39%, #bfd8ffee 79.14%, #a4bcffdb);
+    transform-origin: center;
+    transform: scaleY(0);
+    position: relative;
+  }
+}
+
+@for $i from 1 through 9 {
+  $h: nth($heights, $i);
+  $appear: nth($appearStarts, $i);
+  $disappear: nth($disappearStarts, $i);
+
+  $appearEnd: ($appear + 6%);
+  $disappearEnd: ($disappear + 6%);
+
+  .sound-wave span:nth-child(#{$i}) {
+    height: #{$h}px;
+    animation: wave#{$i} $cycle infinite ease-in-out;
+  }
+
+  @for $i from 1 through 9 {
+    $h: nth($heights, $i);
+    $appear: nth($appearStarts, $i);
+    $disappear: nth($disappearStarts, $i);
+
+    $appearEnd: ($appear + 6%);
+    $disappearEnd: ($disappear + 6%);
+
+    $jump: if($i == 1, scaleY(1) scaleX(1), scaleY(1.1) scaleX(0.8));
+
+    .sound-wave span:nth-child(#{$i}) {
+      height: #{$h}px;
+      animation: wave#{$i} $cycle infinite ease-in-out;
+    }
+
+    @keyframes wave#{$i} {
+      0% {
+        transform: scaleY(0) scaleX(1);
+      }
+      #{$appear} {
+        transform: scaleY(0) scaleX(1);
+      }
+      #{$appearEnd} {
+        transform: $jump;
+      }
+      #{($appearEnd + 6%)} {
+        transform: scaleY(1) scaleX(1);
+      }
+
+      #{$disappear} {
+        transform: scaleY(1) scaleX(1);
+      }
+      #{$disappearEnd} {
+        transform: $jump;
+      }
+      #{($disappearEnd + 6%)} {
+        transform: scaleY(0) scaleX(1);
+      }
+      100% {
+        transform: scaleY(0) scaleX(1);
+      }
+    }
+  }
+}
+
+.sound-wave span:nth-child(9) {
+  height: nth($heights, 9) + px;
+  animation: wave9 $cycle infinite ease-in-out;
+}
+
+@keyframes wave9 {
+  0% {
+    transform: scaleY(0) scaleX(1) translateX(0);
+  }
+  55% {
+    transform: scaleY(0) scaleX(1) translateX(0);
+  }
+  61% {
+    transform: scaleY(1.1) scaleX(0.8) translateX(0);
+  }
+  67% {
+    transform: scaleY(1) scaleX(1) translateX(0);
+  }
+
+  94% {
+    transform: scaleY(1) scaleX(1) translateX(0);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1) translateX(-176px);
+  }
+
+  0%,
+  15% {
+    transform: scaleY(1) scaleX(1) translateX(-176px);
+  }
+
+  15.1% {
+    transform: scaleY(0) scaleX(1) translateX(0);
+  }
+}
