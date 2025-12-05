@@ -14,8 +14,8 @@ const GlassContainer = () => {
           <div className="liquidGlass-tint"></div>
           <div className="liquidGlass-shine"></div>
           <div className="liquidGlass-logo">
-            <img src="/logo.svg" alt="logo" />
-            <img src="/text-logo.svg" alt="text-logo" />
+            <img src="./logo.svg" alt="logo" />
+            <img src="./text-logo.svg" alt="text-logo" />
           </div>
         </div>
       </div>
